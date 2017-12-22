@@ -66,3 +66,12 @@ insert into PRODUCT (Category, CurrencyCode, DimensionDepth, DimensionHeight, Di
 2017-12-20 16:21:32 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: Table "PRODUCT" not found; SQL statement:
 insert into PRODUCT (Category, CurrencyCode, DimensionDepth, DimensionHeight, DimensionWidth, MainCategory, Name, PictureURL, Price, ShortDescription, Status, SupplierName, Unit, Weight, WeightUnit, ProductId) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [42102-196]
+2017-12-21 10:01:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRODUCT" not found; SQL statement:
+insert into PRODUCT (Category, CurrencyCode, DimensionDepth, DimensionHeight, DimensionWidth, MainCategory, Name, PictureURL, Price, ShortDescription, Status, SupplierName, Unit, Weight, WeightUnit, ProductId) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [42102-196]
+2017-12-21 10:04:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRODUCT" not found; SQL statement:
+insert into PRODUCT (Category, CurrencyCode, DimensionDepth, DimensionHeight, DimensionWidth, MainCategory, Name, PictureURL, Price, ShortDescription, Status, SupplierName, Unit, Weight, WeightUnit, ProductId) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [42102-196]
+2017-12-21 10:34:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRODUCT" not found; SQL statement:
+insert into Product (category, currencyCode, dimensionDepth, dimensionHeight, dimensionWidth, mainCategory, name, pictureUrl, price, shortDescription, status, supplierName, unit, weight, weightUnit, productId) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [42102-196]
