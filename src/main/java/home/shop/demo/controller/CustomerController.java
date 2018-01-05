@@ -22,6 +22,4 @@ public class CustomerController {
     public Iterable<Customer> list() {
         return customerService.getAllCustomers();
     }
-
-
 }

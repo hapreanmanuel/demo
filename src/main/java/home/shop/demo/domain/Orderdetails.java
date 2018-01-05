@@ -26,4 +26,8 @@ public class Orderdetails {
     @Column(name="DISCOUNT")
     private float discount;
 
+    @Basic
+    @Column(name="QUANTITY")
+    private int quantity;
+
 }

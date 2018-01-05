@@ -11,7 +11,7 @@ public class Customer {
 
     @Id
     @Column(name="CUSTOMERID")
-    private String customerid;
+    private String customerID;
 
     @Basic
     @Column(name="COMPANYNAME")

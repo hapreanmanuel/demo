@@ -24,6 +24,10 @@ public class Orders {
     private String customerName;
 
     @Basic
+    @Column(name="EMPLOYEEID")
+    private int employeeId;
+
+    @Basic
     @Column(name="ORDERDATE")
     private String orderDate;
 
@@ -48,8 +52,8 @@ public class Orders {
     private String shipName;
 
     @Basic
-    @Column(name="SHIPADRESS")
-    private String shipAdress;
+    @Column(name="SHIPADDRESS")
+    private String shipAddress;
 
     @Basic
     @Column(name="SHIPCITY")

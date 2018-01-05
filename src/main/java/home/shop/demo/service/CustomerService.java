@@ -42,16 +42,10 @@ public class CustomerService {
 
 
 
-
-
     public void save(List<Customer> customerList){
         customerRepository.save(customerList);
     }
     public Customer save(Customer customer){
         return customerRepository.save(customer);
     }
-
-
-
-
 }
