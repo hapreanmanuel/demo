@@ -1,20 +1,33 @@
 package home.shop.demo.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name="ORDERDETAILS")
+@IdClass(OrderdetailsKey.class)
 public class Orderdetails {
 
+//    @ManyToOne(optional=false)
+//    @JoinColumn(name="ORDERID")
+//    private Orders order;
+//
+//    @ManyToOne
+//    @JoinColumn(name="PRODUCTID")
+//    private Product product;
+//
+//    @EmbeddedId
+//    private OrderdetailsKey orderdetailsKey;
+
     @Id
-    @Column(name = "ORDERID", nullable = false)
+    @Column(name = "ORDERID")
     private int orderId;
 
-    @Basic
+    @Id
     @Column(name="PRODUCTID")
     private String productId;
 
@@ -29,5 +42,13 @@ public class Orderdetails {
     @Basic
     @Column(name="QUANTITY")
     private int quantity;
+
+    //Constructor used by customer when creating the shopping cart
+    public Orderdetails orderdetails(String productId, int quantity){
+        Orderdetails newOrderdetails = new Orderdetails();
+        newOrderdetails.setProductId(productId);
+        newOrderdetails.setQuantity(quantity);
+        return newOrderdetails;
+    }
 
 }

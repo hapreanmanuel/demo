@@ -3,12 +3,18 @@ package home.shop.demo.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Data
 @Entity
 @Table(name="EMPLOYEE")
 public class Employee {
+
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name="EMPLOYEEID")
+    private List<Orders> assignedOrders;
+
     @Id
     @Column(name="EMPLOYEEID")
     private int employeeId;
@@ -32,6 +38,5 @@ public class Employee {
     @Basic
     @Column(name="PHOTO")
     private String photo;
-
 
 }

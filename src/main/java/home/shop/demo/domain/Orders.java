@@ -1,8 +1,11 @@
 package home.shop.demo.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -10,9 +13,21 @@ import javax.persistence.*;
 @Table(name="ORDERS")
 public class Orders {
 
+//    @ManyToOne
+//    @JoinColumn(name="EMPLOYEEID",referencedColumnName = "EMPLOYEEID")
+//    private Employee employee;
+//
+//    @ManyToOne
+//    @JoinColumn(name="CUSTOMERID")
+//    private Customer customer;
+//
+//    @OneToMany
+//    @JoinColumn(name="ORDERID")
+//    private List<Orderdetails> orderdetails = new ArrayList<>();
+
     @Id
-    @Column(name = "ORDERID", nullable = false)
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "ORDERID", nullable = true)
+//    @GeneratedValue(strategy=GenerationType.AUTO)
     private int orderId;
 
     @Basic
@@ -71,4 +86,23 @@ public class Orders {
     @Column(name="SHIPCOUNTRY")
     private String shipCountry;
 
+
+    //Accepted values for status are:
+
+    // - 'new'        -> the order is being created. The client decides a whishlist.
+    //                   orders with status 'new' have not been added to the Orders table yet.
+    // - 'processing' -> the order is currently in process. The client has submitted the request and the order needs
+    //                   to be handled by an employee. In this state the products have not been shipped yet.
+    //                   in this state the order can be cancelled.
+    // - 'cancelled'  -> the order was cancelled by the user and does not need further processing.
+    //                   The order and all corresponding orderdetails are deleted
+    // - 'sent'       -> the order has been executed and the products left the storages
+
+    //Default value when creating a new order is -> 'processing'
+    @Basic
+    @Column(name="STATUS", nullable=false)
+    private String status = "new";                  // default value when creating an order
+
+
 }
+

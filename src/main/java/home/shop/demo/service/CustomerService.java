@@ -11,8 +11,6 @@ import java.util.List;
 @Service
 public class CustomerService {
 
-
-
     @Autowired
     private CustomerRepository customerRepository;
 
@@ -40,12 +38,16 @@ public class CustomerService {
         customerRepository.delete(customerID);
     }
 
-
-
     public void save(List<Customer> customerList){
         customerRepository.save(customerList);
     }
+
     public Customer save(Customer customer){
         return customerRepository.save(customer);
     }
+
+
+
+
+
 }
