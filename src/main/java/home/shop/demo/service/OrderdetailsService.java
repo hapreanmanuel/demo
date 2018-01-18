@@ -1,8 +1,6 @@
 package home.shop.demo.service;
 
 import home.shop.demo.domain.Orderdetails;
-import home.shop.demo.domain.OrderdetailsKey;
-import home.shop.demo.domain.ShippmentDetails;
 import home.shop.demo.repository.OrderdetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +21,13 @@ public class OrderdetailsService {
         this.orderdetailsRepository = orderdetailsRepository;
     }
 
-    public Iterable<Orderdetails> getAllOrderdetails() {
+    public List<Orderdetails> getAllOrderdetails() {
         return orderdetailsRepository.findAll();
     }
 
-    public Orderdetails getOrderdetails(OrderdetailsKey orderdetailsKey) {
-        return orderdetailsRepository.findOneByOrderIdAndProductId(orderdetailsKey.getOrderId(), orderdetailsKey.getProductId());
-    }
+//    public Orderdetails getOrderdetails(OrderdetailsKey orderdetailsKey) {
+//        return orderdetailsRepository.findOneByOrderIdAndProductId(orderdetailsKey.getOrderId(), orderdetailsKey.getProductId());
+//    }
 
     public Orderdetails getOrderdetails(int orderId, String productId) {
         return orderdetailsRepository.findOneByOrderIdAndProductId(orderId,productId);

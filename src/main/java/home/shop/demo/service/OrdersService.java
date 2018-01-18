@@ -24,7 +24,7 @@ public class OrdersService {
     @Autowired
     private EmployeeService employeeService;
 
-    public OrdersService(OrdersRepository ordersRepository){
+    public OrdersService(OrdersRepository ordersRepository) {
         this.ordersRepository = ordersRepository;
     }
 
@@ -36,29 +36,35 @@ public class OrdersService {
         return ordersRepository.findOne(orderId);
     }
 
-    public void addOrder(Orders order){ ordersRepository.save(order); }
+    public void addOrder(Orders order) {
+        ordersRepository.save(order);
+    }
 
-    public void updateOrder(Orders order){ ordersRepository.save(order); }
+    public void updateOrder(Orders order) {
+        ordersRepository.save(order);
+    }
 
     public void deleteOrder(int orderId) {
         ordersRepository.delete(orderId);
     }
 
-    public void save(List<Orders> orders) { ordersRepository.save(orders); }
+    public void save(List<Orders> orders) {
+        ordersRepository.save(orders);
+    }
 
-    public int generateUniqueId(){
+    public int generateUniqueId() {
         int newId = 1;
-        while(ordersRepository.findOne(newId) != null){
+        while (ordersRepository.findOne(newId) != null) {
             newId++;
         }
         return newId;
     }
 
-    //Method to generate a new order for a specified customer
-    //This method sets the required fields for an order which are not user-input
+    //Method to create a new order for a specified customer
+    //This method sets the required fields for an order which are non user-input
     public Orders newOrderForCustomer(String customerId) {
         Orders newOrderForCustomer = new Orders();
-        newOrderForCustomer.setOrderId(generateUniqueId());     //Set unique identification
+//        newOrderForCustomer.setOrderId(generateUniqueId());     //Set unique identification
         newOrderForCustomer.setCustomerId(customerId);
         newOrderForCustomer.setCustomerName(customerService.getCustomer(customerId).getCompanyName());
         newOrderForCustomer.setOrderDate(new Timestamp(System.currentTimeMillis()).toString());
@@ -70,6 +76,9 @@ public class OrdersService {
         newOrderForCustomer.setRequiredDate(new Timestamp(cal.getTime().getTime()).toString());
 
         newOrderForCustomer.setEmployeeId(employeeService.getMostAvailableEmployee().getEmployeeId());
+
+        //Set currentOrder to this one. If the user logs out without submitting, this order will be lost.
+        customerService.getCustomer(customerId).setCurrentOrder(newOrderForCustomer);
 
         return newOrderForCustomer;
     }
@@ -86,34 +95,8 @@ public class OrdersService {
         ordersRepository.save(order);
     }
 
-    public List<Orders> getOrdersForEmployee(int employeeId){
+    public List<Orders> getOrdersForEmployee(int employeeId) {
         return ordersRepository.findAllByEmployeeId(employeeId);
     }
 
-    public void setOrderStatus_processing(int orderId){
-        if(getOrder(orderId).getStatus().equals("new")) {
-            getOrder(orderId).setStatus("processing");
-            updateOrder(getOrder(orderId));
-        }
-    }
-
-    public void setOrderStatus_cancelled(int orderId){
-        if(getOrder(orderId).getStatus().equals("processing")){
-            getOrder(orderId).setStatus("cancelled");
-            updateOrder(getOrder(orderId));
-        }
-        else{
-            // Display error message
-        }
-    }
-
-    public void setOrderStatus_sent(int orderId){
-        if(getOrder(orderId).getStatus().equals("processing")){
-            getOrder(orderId).setStatus("sent");
-            updateOrder(getOrder(orderId));
-        }
-        else{
-            // Display error message
-        }
-    }
 }

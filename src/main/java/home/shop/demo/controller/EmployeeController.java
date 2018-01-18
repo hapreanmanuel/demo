@@ -44,15 +44,11 @@ public class EmployeeController {
         else {
             return null;
         }
-
     }
 
     @PostMapping("/{employeeId}/{orderId}/process")
     public void processOrder(@PathVariable("employeeId") int employeeId, @PathVariable("orderId") int orderId){
-        Orders order = getOrderOfEmployee(employeeId,orderId);
-
-        ordersService.setOrderStatus_sent(order.getOrderId());
-
+        employeeService.processOrder(ordersService.getOrder(orderId), employeeService.getEmployee(employeeId));
     }
 
 }

@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @NoArgsConstructor
 @Data
@@ -51,4 +52,11 @@ public class Orderdetails {
         return newOrderdetails;
     }
 
+}
+
+@Data
+class OrderdetailsKey implements Serializable{
+    private int orderId;
+
+    private String productId;
 }

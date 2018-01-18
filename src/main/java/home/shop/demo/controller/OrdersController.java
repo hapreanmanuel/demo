@@ -2,13 +2,11 @@ package home.shop.demo.controller;
 
 import home.shop.demo.domain.Orderdetails;
 import home.shop.demo.domain.Orders;
+import home.shop.demo.exceptions.InsufficientStockException;
 import home.shop.demo.service.OrderdetailsService;
 import home.shop.demo.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,5 +33,10 @@ public class OrdersController {
     public List<Orderdetails> showDetailsForOrder(@PathVariable("orderId") int orderId) {
         return orderdetailsService.getOrderdetailsByOrderId(orderId);
     }
+
+//    @RequestMapping("/error")
+//    public @ResponseBody String throwErrorMessage() throws InsufficientStockException {
+//        throw new InsufficientStockException();
+//    }
 
 }

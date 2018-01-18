@@ -42,8 +42,17 @@ public class ProductStock {
 
     @Basic
     @Column(name = "QUANTITY")
-    private int availableQuantity;
-
+    private int quantity;
 
 }
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+class ProductStockKey implements Serializable{
+
+    private String productId;
+
+    private String locationId;
+
+}

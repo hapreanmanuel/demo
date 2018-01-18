@@ -5,7 +5,6 @@ import home.shop.demo.service.CustomerService;
 import home.shop.demo.service.OrderdetailsService;
 import home.shop.demo.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -57,9 +56,10 @@ public class CustomerController {
     }
 
     //TODO - extra logic to block changes for the order after submition
+    //TODO - unit testing
     @PostMapping("/{customerId}/{orderId}/submit")
-    public void submitOrder(@PathVariable("orderId") int orderId){
-        ordersService.setOrderStatus_processing(orderId);
+    public void submitOrder(@PathVariable("customerId") String customerId, @PathVariable("orderId") int orderId){
+        customerService.submitOrder(ordersService.getOrder(orderId), customerId);
     }
 
 

@@ -1,7 +1,6 @@
 package home.shop.demo.domain;
 
 import lombok.Data;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,4 +21,7 @@ public class Customer {
     @Basic
     @Column(name="COMPANYNAME")
     private String companyName;
+
+    @Transient
+    private Orders currentOrder;
 }

@@ -32,4 +32,6 @@ public class LocationService {
     public void deleteLocation(String locationId) {
         locationRepository.delete(locationId);
     }
+
+
 }

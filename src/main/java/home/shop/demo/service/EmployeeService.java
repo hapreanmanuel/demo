@@ -1,12 +1,12 @@
 package home.shop.demo.service;
 
 import home.shop.demo.domain.Employee;
+import home.shop.demo.domain.OrderStatus;
 import home.shop.demo.domain.Orders;
 import home.shop.demo.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -44,18 +44,46 @@ public class EmployeeService {
     public Employee getMostAvailableEmployee() {
         Employee mostAvailableEmployee = employeeRepository.findAll().get(0);
 
-    //    System.out.println("1st Employee: " + mostAvailableEmployee.getEmployeeId() + " has " + mostAvailableEmployee.getAssignedOrders().size() + " assigned orders.");
 
         for(Employee employee : employeeRepository.findAll()) {
-    //        System.out.println("Current Employee: " + employee.getEmployeeId() + " has " + employee.getAssignedOrders().size() + " assigned orders.");
 
             if(employee.getAssignedOrders().size() < mostAvailableEmployee.getAssignedOrders().size()){
                 mostAvailableEmployee = employee;
             }
       }
-    //    System.out.println("Most availalbe Employee: " + mostAvailableEmployee.getEmployeeId() + " has " + mostAvailableEmployee.getAssignedOrders().size() + " assigned orders.");
-
         return mostAvailableEmployee;
     }
+
+    //Process an assigned order
+    public void processOrder(Orders orderToProcess, Employee employee){
+        if(orderToProcess.getEmployeeId() == employee.getEmployeeId()){
+            //Order process actions.
+            //Validation, select location from which to send the products, create billing, update stocks
+
+            //Update order status
+            orderToProcess.setStatus(OrderStatus.SENT);
+
+            //Presist changes
+            ordersService.updateOrder(orderToProcess);
+        }
+        else{
+            //Print error messages
+        }
+
+    }
+
+//    //Method used by the user to canel an order.
+//    public void cancelOrder(Orders orderToCancel, String customerId) {
+//        if(orderToCancel.getStatus()== OrderStatus.PROCESSING  && orderToCancel.getCustomerId().equals(customerId)){
+//            //Cancel-specific actions
+//            orderToCancel.setStatus(OrderStatus.PROCESSING);            //set status to processing
+//
+//            //Add the order to the database
+//            ordersService.updateOrder(orderToCancel);
+//        }
+//        else{
+//            //Print error messages
+//        }
+//    }
 
 }

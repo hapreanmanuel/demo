@@ -30,6 +30,9 @@ public class OrderdetailsController {
         return orderdetailsService.getOrderdetailsByOrderId(orderId);
     }
 
-
+    @GetMapping("/byproduct/{productId}")
+    public List<Orderdetails> orderdetailsByProductId(@PathVariable("productId") String productId) {
+        return orderdetailsService.getOrderdetailsByProductId(productId);
+    }
 
 }

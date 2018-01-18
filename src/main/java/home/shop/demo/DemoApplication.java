@@ -136,7 +136,7 @@ class CleanStateDataLoader implements CommandLineRunner {
 			List<Orders> orders = mapper.readValue(ordersInputStream, ordersTypeRef);
 
 			//change status of orders read from JSON to 'processing'
-			orders.forEach(order -> order.setStatus("processing"));
+			orders.forEach(order -> order.setStatus(OrderStatus.PROCESSING));
 
 			ordersService.save(orders);
 			logger.info("Orders saved to db");
@@ -198,8 +198,8 @@ class TableInitializations implements CommandLineRunner {
 		locationService.addLocation(secondLocation);
 
 		//Create stocks for each location
-		List<ProductStock> mainLocationStock = new ArrayList<ProductStock>();
-		List<ProductStock> secondLocationStock = new ArrayList<ProductStock>();
+		List<ProductStock> mainLocationStock = new ArrayList<>();
+		List<ProductStock> secondLocationStock = new ArrayList<>();
 
 		int mainLocationQuantityForEachProduct = 1000;
 		int secondLocationQuantityForEachProduct = 2000;

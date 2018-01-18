@@ -31,7 +31,6 @@ public class JpaRepositoriesTest {
     @Autowired
     CustomerService customerService;
 
-
     @Autowired
     ProductService productService;
 
@@ -150,7 +149,7 @@ public class JpaRepositoriesTest {
 
         System.out.println("Orders with orderdetailsKey:( " + dummyOrderId + ", " + dummyProductId+")");
         //Again but with 'OrderdetailsKey' entity
-        System.out.println(orderdetailsService.getOrderdetails(new OrderdetailsKey(dummyOrderId,dummyProductId)).toString());
+        System.out.println(orderdetailsService.getOrderdetails(dummyOrderId,dummyProductId).toString());
 
         System.out.println("Orders with orderId: " + dummyOrderId);
         //All orders with dummyOrderId
@@ -236,6 +235,44 @@ public class JpaRepositoriesTest {
 
         System.out.println("14 Days from now: " + nextWeek);
 
+
+    }
+
+    //In dev phase, two locations have been created.
+    //The first location has 1000 pieces for each product and the second location has 2000 pieces for each product
+    //This test verifies if the total stock calculation method works correctly (expected 3000 pieces for any product)
+    @Test
+    public void productStocksTest(){
+
+        List<ProductStock> totalProductStock = productStockService.totalProductStocks();
+
+        assertThat(totalProductStock.stream().findFirst().get().getQuantity()).isEqualTo(3000);
+
+        totalProductStock.forEach(productStock -> System.out.println(productStock.toString()));
+
+    }
+
+    @Autowired
+    ShopService shopService;
+
+    //This test checks the getAvailableStockForLocation of the ShopService class
+    @Test
+    public void testAvailableStocksRetrieval(){
+
+        ProductStock p1 = new ProductStock();   p1.setProductId("HT-1001");
+        ProductStock p2 = new ProductStock();   p2.setProductId("HT-1600");
+        ProductStock p3 = new ProductStock();   p3.setProductId("HT-8000");
+
+
+        //Dummy shoppingCart
+        List<ProductStock> dummyShoppingCart = Arrays.asList(p1, p2, p3);
+
+
+        List<ProductStock> availableAtMain = shopService.getAvailableStockForLocation(dummyShoppingCart, locationService.getLocation("mainLocation"));
+
+        availableAtMain.forEach(productStock -> System.out.println(productStock.toString()));
+
+        assertThat(availableAtMain).size().isEqualTo(3);
 
     }
 

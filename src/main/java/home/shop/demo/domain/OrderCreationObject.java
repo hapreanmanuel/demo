@@ -9,6 +9,7 @@ import java.util.List;
 
 //This object is created by the user ('customer') via the GUI
 //No data is saved to the database until the 'Orders' entity is created.
+//This class should contain all the user-input fields necessary for creating an order.
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,17 +17,17 @@ import java.util.List;
 public class OrderCreationObject {
 
     private Customer customer;                          //the  customer which creates the order
-
-    //This field is not a user input ; the employee is assigned by a availability algorithm
-    private Employee employee;                          //the employee assigned to the order
+//
+//    //This field is not a user input ; the employee is assigned by a availability algorithm
+//    private Employee employee;                          //the employee assigned to the order
 
     private Timestamp orderCreation;                    //moment of submitting the order
 
-    private Timestamp orderRequired;                    //required time of delivery
+//    private Timestamp orderRequired;                    //required time of delivery
 
     private List<Orderdetails> orderdetailsList;        //shopping cart
 
-    //Address fields
+    //Shipment fields
     private String fullAddress;
 
     private String city;
